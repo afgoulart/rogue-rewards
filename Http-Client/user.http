@@ -1,0 +1,43 @@
+@token = {{$processEnv TOKEN}}
+
+### Get All Users
+GET http://localhost:3000/user
+Authorization: Bearer {{token}}
+
+###
+
+### Get User by ID
+GET http://localhost:3000/user/1
+Authorization: Bearer {{token}}
+
+###
+
+### Create New User
+POST http://localhost:3000/user
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "username": "anotheruser",
+  "email": "anotheruser@example.com",
+  "password": "anotherpassword"
+}
+
+###
+
+### Update User
+PATCH http://localhost:3000/user/1
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "email": "updatedemail@example.com"
+}
+
+###
+
+### Delete User
+DELETE http://localhost:3000/user/1
+Authorization: Bearer {{token}}
+
+###

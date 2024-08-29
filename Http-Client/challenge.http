@@ -1,0 +1,42 @@
+@token = {{$processEnv TOKEN}}
+
+### Get All Challenges
+GET http://localhost:3000/challenge
+Authorization: Bearer {{token}}
+
+###
+
+### Get Challenge by ID
+GET http://localhost:3000/challenge/1
+Authorization: Bearer {{token}}
+
+###
+
+### Create New Challenge
+POST http://localhost:3000/challenge
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "description": "Complete level 1",
+  "points": 100
+}
+
+###
+
+### Update Challenge
+PATCH http://localhost:3000/challenge/1
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "points": 150
+}
+
+###
+
+### Delete Challenge
+DELETE http://localhost:3000/challenge/1
+Authorization: Bearer {{token}}
+
+###

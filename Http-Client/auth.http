@@ -1,0 +1,30 @@
+@token = {{$processEnv TOKEN}}
+
+### Login
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "username": "testuser",
+  "password": "testpassword"
+}
+
+###
+
+### Register
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+  "username": "newuser",
+  "email": "newuser@example.com",
+  "password": "newpassword"
+}
+
+###
+
+### Verify Token
+GET http://localhost:3000/auth/verify
+Authorization: Bearer {{token}}
+
+###

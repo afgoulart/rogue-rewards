@@ -1,0 +1,42 @@
+@token = {{$processEnv TOKEN}}
+
+### Get All Games
+GET http://localhost:3000/game
+Authorization: Bearer {{token}}
+
+###
+
+### Get Game by ID
+GET http://localhost:3000/game/1
+Authorization: Bearer {{token}}
+
+###
+
+### Create New Game
+POST http://localhost:3000/game
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "New Game",
+  "level": 1
+}
+
+###
+
+### Update Game
+PATCH http://localhost:3000/game/1
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "level": 2
+}
+
+###
+
+### Delete Game
+DELETE http://localhost:3000/game/1
+Authorization: Bearer {{token}}
+
+###

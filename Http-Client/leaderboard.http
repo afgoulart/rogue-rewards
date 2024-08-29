@@ -1,0 +1,42 @@
+@token = {{$processEnv TOKEN}}
+
+### Get Leaderboard
+GET http://localhost:3000/leaderboard
+Authorization: Bearer {{token}}
+
+###
+
+### Get Leaderboard by ID
+GET http://localhost:3000/leaderboard/1
+Authorization: Bearer {{token}}
+
+###
+
+### Create Leaderboard Entry
+POST http://localhost:3000/leaderboard
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "userId": 1,
+  "score": 500
+}
+
+###
+
+### Update Leaderboard Entry
+PATCH http://localhost:3000/leaderboard/1
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "score": 750
+}
+
+###
+
+### Delete Leaderboard Entry
+DELETE http://localhost:3000/leaderboard/1
+Authorization: Bearer {{token}}
+
+###

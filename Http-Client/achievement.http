@@ -1,0 +1,48 @@
+@token = {{$processEnv TOKEN}}
+
+### Get All Achievements
+
+GET http://localhost:3000/achievement
+Authorization: Bearer {{token}}
+
+###
+
+### Get Achievement by ID
+
+GET http://localhost:3000/achievement/1
+Authorization: Bearer {{token}}
+
+###
+
+### Create New Achievement
+
+POST http://localhost:3000/achievement
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+"title": "First Win",
+"description": "Achieved first win",
+"badgeUrl": "http://example.com/badge.png"
+}
+
+###
+
+### Update Achievement
+
+PATCH http://localhost:3000/achievement/1
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+"description": "Achieved first win and more"
+}
+
+###
+
+### Delete Achievement
+
+DELETE http://localhost:3000/achievement/1
+Authorization: Bearer {{token}}
+
+###
