@@ -8,4 +8,10 @@ export class Auth {
   // Adicione suas colunas aqui
   @Column()
   name: string;
+
+  @Column()
+  username: string;
+
+  @Column()
+  password: string;
 }

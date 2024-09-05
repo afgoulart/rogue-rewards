@@ -17,6 +17,15 @@ export class AuthService {
     return this.authRepository.save(auth);
   }
 
+  validate(username: string, password: string) {
+    return this.authRepository.findOne({
+      select: {
+        username,
+        password,
+      },
+    });
+  }
+
   findAll() {
     return this.authRepository.find();
   }
