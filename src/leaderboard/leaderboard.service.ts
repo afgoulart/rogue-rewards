@@ -1,8 +1,8 @@
+import { DeepPartial, Repository } from 'typeorm';
+
 import { Injectable } from '@nestjs/common';
-import { CreateLeaderboardDto } from './dto/create-leaderboard.dto';
-import { UpdateLeaderboardDto } from './dto/update-leaderboard.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+
 import { Leaderboard } from './leaderboard.entity';
 
 @Injectable()
@@ -12,7 +12,7 @@ export class LeaderboardService {
     private readonly leaderboardRepository: Repository<Leaderboard>,
   ) {}
 
-  create(createLeaderboardDto: CreateLeaderboardDto) {
+  create(createLeaderboardDto: DeepPartial<Leaderboard>) {
     const leaderboard = this.leaderboardRepository.create(createLeaderboardDto);
     return this.leaderboardRepository.save(leaderboard);
   }
@@ -25,7 +25,7 @@ export class LeaderboardService {
     return this.leaderboardRepository.findOneBy({ id });
   }
 
-  update(id: number, updateLeaderboardDto: UpdateLeaderboardDto) {
+  update(id: number, updateLeaderboardDto: DeepPartial<Leaderboard>) {
     return this.leaderboardRepository.update(id, updateLeaderboardDto);
   }
 

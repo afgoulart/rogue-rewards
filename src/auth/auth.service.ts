@@ -1,9 +1,11 @@
+import { Repository } from 'typeorm';
+
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+
+import { Auth } from './auth.entity';
 import { CreateAuthDto } from './dto/create-auth.dto';
 import { UpdateAuthDto } from './dto/update-auth.dto';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { Auth } from './auth.entity';
 
 @Injectable()
 export class AuthService {
@@ -19,10 +21,8 @@ export class AuthService {
 
   validate(username: string, password: string) {
     return this.authRepository.findOne({
-      select: {
-        username,
-        password,
-      },
+      select: ['username', 'password'],
+      where: { username, password },
     });
   }
 

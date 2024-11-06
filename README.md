@@ -155,4 +155,4 @@ Displays user rankings based on scores. The leaderboard updates dynamically as u
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.

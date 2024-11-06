@@ -1,45 +1,74 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
-import { AchievementService } from './achievement.service';
-import { CreateAchievementDto } from './dto/create-achievement.dto';
-import { UpdateAchievementDto } from './dto/update-achievement.dto';
+import { DeepPartial } from 'typeorm';
 
-@Controller('Achievement')
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+
+import { Achievement } from './achievement.entity';
+import { AchievementService } from './achievement.service';
+
+@ApiTags('achievement')
+@Controller('achievement')
 export class AchievementController {
-  constructor(private readonly AchievementService: AchievementService) {}
+  constructor(private readonly achievementService: AchievementService) {}
 
   @Post()
-  create(@Body() createAchievementDto: CreateAchievementDto) {
-    return this.AchievementService.create(createAchievementDto);
+  @ApiOperation({ summary: 'Create a new achievement' })
+  @ApiResponse({
+    status: 201,
+    description: 'Achievement created successfully.',
+  })
+  @ApiResponse({ status: 400, description: 'Bad Request.' })
+  create(@Body() achievement: DeepPartial<Achievement>) {
+    return this.achievementService.create(achievement);
   }
 
   @Get()
   findAll() {
-    return this.AchievementService.findAll();
+    return this.achievementService.findAll();
   }
 
   @Get(':id')
+  @ApiOperation({ summary: 'Get achievement by ID' })
+  @ApiResponse({
+    status: 200,
+    description: 'Achievement retrieved successfully.',
+  })
+  @ApiResponse({ status: 404, description: 'Achievement not found.' })
   findOne(@Param('id') id: string) {
-    return this.AchievementService.findOne(+id);
+    return this.achievementService.findOne(+id);
   }
 
   @Patch(':id')
+  @ApiOperation({ summary: 'Update achievement by ID' })
+  @ApiResponse({
+    status: 200,
+    description: 'Achievement updated successfully.',
+  })
+  @ApiResponse({ status: 400, description: 'Bad Request.' })
+  @ApiResponse({ status: 404, description: 'Achievement not found.' })
   update(
     @Param('id') id: string,
-    @Body() updateAchievementDto: UpdateAchievementDto,
+    @Body() achievement: DeepPartial<Achievement>,
   ) {
-    return this.AchievementService.update(+id, updateAchievementDto);
+    return this.achievementService.update(+id, achievement);
   }
 
   @Delete(':id')
+  @ApiOperation({ summary: 'Delete achievement by ID' })
+  @ApiResponse({
+    status: 200,
+    description: 'Achievement deleted successfully.',
+  })
+  @ApiResponse({ status: 404, description: 'Achievement not found.' })
   remove(@Param('id') id: string) {
-    return this.AchievementService.remove(+id);
+    return this.achievementService.remove(+id);
   }
 }

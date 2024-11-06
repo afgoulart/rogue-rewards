@@ -1,8 +1,8 @@
+import { DeepPartial, Repository } from 'typeorm';
+
 import { Injectable } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+
 import { User } from './user.entity';
 
 @Injectable()
@@ -12,7 +12,7 @@ export class UserService {
     private readonly userRepository: Repository<User>,
   ) {}
 
-  create(createUserDto: CreateUserDto) {
+  create(createUserDto: DeepPartial<User>) {
     const user = this.userRepository.create(createUserDto);
     return this.userRepository.save(user);
   }
@@ -25,7 +25,7 @@ export class UserService {
     return this.userRepository.findOneBy({ id });
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
+  update(id: number, updateUserDto: DeepPartial<User>) {
     return this.userRepository.update(id, updateUserDto);
   }
 

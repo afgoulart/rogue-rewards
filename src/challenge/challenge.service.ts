@@ -1,8 +1,8 @@
+import { DeepPartial, Repository } from 'typeorm';
+
 import { Injectable } from '@nestjs/common';
-import { CreateChallengeDto } from './dto/create-challenge.dto';
-import { UpdateChallengeDto } from './dto/update-challenge.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+
 import { Challenge } from './challenge.entity';
 
 @Injectable()
@@ -12,7 +12,7 @@ export class ChallengeService {
     private readonly challengeRepository: Repository<Challenge>,
   ) {}
 
-  create(createChallengeDto: CreateChallengeDto) {
+  create(createChallengeDto: DeepPartial<Challenge>) {
     const challenge = this.challengeRepository.create(createChallengeDto);
     return this.challengeRepository.save(challenge);
   }
@@ -25,7 +25,7 @@ export class ChallengeService {
     return this.challengeRepository.findOneBy({ id });
   }
 
-  update(id: number, updateChallengeDto: UpdateChallengeDto) {
+  update(id: number, updateChallengeDto: DeepPartial<Challenge>) {
     return this.challengeRepository.update(id, updateChallengeDto);
   }
 
